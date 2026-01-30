@@ -1,0 +1,266 @@
+AI Trading Web Application
+
+Product Requirements Document (PRD)
+
+Version: 1.0 (MVP)
+
+Product Goal: To develop a web-based AI trading application that assists users in making informed trading decisions using AI-driven signals, market analysis, and automated alerts. The system focuses on education, decision support, and risk management rather than blind auto-trading.
+
+
+---
+
+1. Product Overview
+
+Product Name: TradeMind AI (working title)
+
+Problem Statement: Retail traders often lose money due to lack of market knowledge, emotional trading, and poor risk management. Existing platforms are complex and not beginner-friendly.
+
+Solution: TradeMind AI provides AI-generated trade signals, market insights, and risk-based suggestions through a clean web interface, helping users trade more confidently.
+
+Target Users:
+
+Beginner retail traders
+
+Intermediate traders
+
+Part-time traders
+
+Trading learners / students
+
+
+
+---
+
+2. Core Technology & Architecture
+
+Component	Technology / Detail	Purpose
+
+Frontend	React.js / Next.js	Responsive web UI
+UI Design	Tailwind CSS	Clean and modern design
+Backend	Python (FastAPI)	Business logic & APIs
+AI Engine	Python + ML Models	Signal generation & prediction
+Database	PostgreSQL	User & trade data storage
+Market Data	TradingView API / Alpha Vantage	Live & historical market data
+Authentication	JWT / OAuth	Secure login
+Hosting	AWS / Vercel	Deployment
+
+
+
+---
+
+3. User Roles
+
+1. Trader (End User Only)
+
+
+
+> Note: This MVP does not include an Admin role. All users are redirected directly to the Trading Dashboard after login.
+
+
+
+
+---
+
+4. User Flows & Screen Specifications
+
+A. Trader (End User) Screens
+
+Screen Name	Detail / Functionality	Key Features & Data
+
+Landing Page	Product introduction	Features, pricing, CTA
+Login / Signup	User authentication	Email, Password, OTP
+Dashboard	Trading overview	Balance, active signals, market summary
+Market Watch	Live market view	Charts, indicators, trends
+AI Signals Screen	AI trade suggestions	Buy/Sell, Entry, SL, Target, Confidence %
+Trade Details	Signal explanation	Reasoning, indicators used
+Alerts Screen	Price & signal alerts	Email / in-app alerts
+Trade History	Past signals & outcomes	Profit/Loss, accuracy
+Profile	User preferences	Risk level, capital size
+
+
+
+---
+
+|---|---| | Admin Login | Secure admin access | Role-based login | | Admin Dashboard | Platform monitoring | Users, performance metrics | | Signal Control | Manage AI signals | Enable/Disable models | | User Management | Manage traders | Block / View users |
+
+
+---
+
+5. Functional Requirements
+
+AI Signal Generation Logic
+
+1. Fetch real-time and historical market data.
+
+
+2. Preprocess data (indicators: RSI, MACD, EMA).
+
+
+3. AI model predicts market direction.
+
+
+4. Risk management module calculates Stop Loss & Target.
+
+
+5. Signal confidence score is generated.
+
+
+6. Signal displayed to users.
+
+
+
+
+---
+
+Alert Logic
+
+1. User subscribes to a signal.
+
+
+2. System monitors live price.
+
+
+3. Alert triggered when entry / SL / target hits.
+
+
+4. Notification sent via web/email.
+
+
+
+
+---
+
+6. AI & ML Model Details (High-Level)
+
+Models Used: Random Forest / LSTM (future scope)
+
+Input Features: OHLC data, indicators
+
+Output: Buy / Sell / Hold
+
+Evaluation Metrics: Accuracy, Precision
+
+
+
+---
+
+7. Data Structure (High-Level)
+
+User Table
+
+User ID
+
+Name
+
+Email
+
+Risk Level
+
+Capital Size
+
+
+Signal Table
+
+Signal ID
+
+Asset Name
+
+Signal Type (Buy/Sell)
+
+Entry Price
+
+Stop Loss
+
+Target
+
+Confidence Score
+
+Timestamp
+
+
+Trade History Table
+
+User ID
+
+Signal ID
+
+Outcome
+
+P/L
+
+
+
+---
+
+8. Non-Functional Requirements (NFRs)
+
+High availability and low latency
+
+Secure authentication & authorization
+
+Data encryption (HTTPS)
+
+Scalable architecture
+
+Beginner-friendly UI
+
+
+
+---
+
+9. Assumptions & Constraints
+
+Internet connection required
+
+MVP focuses on decision support, not auto-trading
+
+Market data APIs may have rate limits
+
+
+
+---
+
+10. Estimated Cost & Timeline
+
+Estimated Cost: ₹6,000 – ₹8,000
+
+Timeline:
+
+UI/UX Design: 1 week
+
+Backend & AI Model: 3 weeks
+
+Frontend Development: 2 weeks
+
+Testing & Deployment: 1 week
+
+
+
+---
+
+11. Future Enhancements
+
+Fully automated trading (broker integration)
+
+Mobile app version
+
+Advanced AI models (Deep Learning)
+
+Copy trading feature
+
+Multi-asset support (Crypto, Forex, Stocks)
+
+
+
+---
+
+12. Legal & Risk Disclaimer
+
+This platform provides AI-assisted trading insights for educational purposes only. Users are solely responsible for their trading decisions and financial risks.
+
+
+---
+
+13. Conclusion
+
+TradeMind AI aims to bridge the gap between complex trading systems and everyday traders by providing intelligent, transparent, and risk-aware AI trading assistance

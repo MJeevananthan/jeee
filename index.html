@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeMind AI - Trading Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>TradeMind AI</span>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#signals" class="nav-link">AI Signals</a>
+                <a href="#market" class="nav-link">Market Watch</a>
+                <a href="#history" class="nav-link">Trade History</a>
+                <a href="#alerts" class="nav-link">Alerts</a>
+            </nav>
+            <div class="user-info">
+                <span class="balance">$25,430.50</span>
+                <div class="user-avatar" onclick="showUserMenu()">
+                    <i class="fas fa-user"></i>
+                </div>
+                <!-- User Menu Dropdown -->
+                <div id="user-menu" class="user-menu">
+                    <div class="user-menu-header">
+                        <div class="user-avatar-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name">Demo User</span>
+                            <span class="user-email">demo@example.com</span>
+                        </div>
+                    </div>
+                    <div class="user-menu-items">
+                        <a href="#" class="menu-item">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </a>
+                        <a href="#" class="menu-item">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                        </a>
+                        <a href="#" class="menu-item">
+                            <i class="fas fa-question-circle"></i>
+                            Help & Support
+                        </a>
+                        <div class="menu-divider"></div>
+                        <a href="#" class="menu-item logout" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <h1 class="section-title">Trading Dashboard</h1>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Portfolio Value</h3>
+                            <p class="stat-value">$25,430.50</p>
+                            <span class="stat-change positive">+2.4%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Today's P&L</h3>
+                            <p class="stat-value">+$342.80</p>
+                            <span class="stat-change positive">+1.4%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Active Signals</h3>
+                            <p class="stat-value">7</p>
+                            <span class="stat-change">3 Buy, 4 Sell</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Win Rate</h3>
+                            <p class="stat-value">73.2%</p>
+                            <span class="stat-change positive">+5.1%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3>Portfolio Performance</h3>
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Market Overview</h3>
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Signals -->
+                <div class="recent-signals">
+                    <h3>Recent AI Signals</h3>
+                    <div class="signals-list">
+                        <div class="signal-item buy">
+                            <div class="signal-info">
+                                <span class="symbol">AAPL</span>
+                                <span class="signal-type">BUY</span>
+                                <span class="confidence">92% Confidence</span>
+                            </div>
+                            <div class="signal-prices">
+                                <span class="entry">Entry: $175.20</span>
+                                <span class="target">Target: $182.50</span>
+                                <span class="sl">SL: $170.80</span>
+                            </div>
+                        </div>
+                        
+                        <div class="signal-item sell">
+                            <div class="signal-info">
+                                <span class="symbol">TSLA</span>
+                                <span class="signal-type">SELL</span>
+                                <span class="confidence">87% Confidence</span>
+                            </div>
+                            <div class="signal-prices">
+                                <span class="entry">Entry: $245.80</span>
+                                <span class="target">Target: $235.20</span>
+                                <span class="sl">SL: $252.10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Signals Section -->
+        <section id="signals" class="section">
+            <div class="container">
+                <h1 class="section-title">AI Trading Signals</h1>
+                
+                <div class="signals-filter">
+                    <button class="filter-btn active" data-filter="all">All Signals</button>
+                    <button class="filter-btn" data-filter="buy">Buy Signals</button>
+                    <button class="filter-btn" data-filter="sell">Sell Signals</button>
+                    <button class="filter-btn" data-filter="high">High Confidence</button>
+                </div>
+
+                <div class="signals-grid">
+                    <div class="signal-card buy" data-type="buy" data-confidence="high">
+                        <div class="signal-header">
+                            <span class="symbol">NVDA</span>
+                            <span class="signal-badge buy">BUY</span>
+                            <span class="confidence-score">94%</span>
+                        </div>
+                        <div class="signal-body">
+                            <div class="price-info">
+                                <div class="price-item">
+                                    <label>Entry Price</label>
+                                    <span>$420.50</span>
+                                </div>
+                                <div class="price-item">
+                                    <label>Target</label>
+                                    <span>$445.20</span>
+                                </div>
+                                <div class="price-item">
+                                    <label>Stop Loss</label>
+                                    <span>$405.80</span>
+                                </div>
+                            </div>
+                            <div class="signal-reasoning">
+                                <p>Strong bullish momentum with RSI oversold recovery and MACD crossover</p>
+                            </div>
+                            <button class="execute-btn">Execute Trade</button>
+                        </div>
+                    </div>
+
+                    <div class="signal-card sell" data-type="sell" data-confidence="medium">
+                        <div class="signal-header">
+                            <span class="symbol">META</span>
+                            <span class="signal-badge sell">SELL</span>
+                            <span class="confidence-score">81%</span>
+                        </div>
+                        <div class="signal-body">
+                            <div class="price-info">
+                                <div class="price-item">
+                                    <label>Entry Price</label>
+                                    <span>$312.80</span>
+                                </div>
+                                <div class="price-item">
+                                    <label>Target</label>
+                                    <span>$298.50</span>
+                                </div>
+                                <div class="price-item">
+                                    <label>Stop Loss</label>
+                                    <span>$320.40</span>
+                                </div>
+                            </div>
+                            <div class="signal-reasoning">
+                                <p>Bearish divergence detected with resistance at key level</p>
+                            </div>
+                            <button class="execute-btn">Execute Trade</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Watch Section -->
+        <section id="market" class="section">
+            <div class="container">
+                <h1 class="section-title">Market Watch</h1>
+                
+                <div class="market-overview">
+                    <div class="market-indices">
+                        <div class="index-card">
+                            <h3>S&P 500</h3>
+                            <span class="index-value">4,235.67</span>
+                            <span class="index-change positive">+0.8%</span>
+                        </div>
+                        <div class="index-card">
+                            <h3>NASDAQ</h3>
+                            <span class="index-value">13,456.23</span>
+                            <span class="index-change positive">+1.2%</span>
+                        </div>
+                        <div class="index-card">
+                            <h3>DOW</h3>
+                            <span class="index-value">34,567.89</span>
+                            <span class="index-change negative">-0.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="watchlist">
+                    <h3>Your Watchlist</h3>
+                    <div class="watchlist-table">
+                        <div class="table-header">
+                            <span>Symbol</span>
+                            <span>Price</span>
+                            <span>Change</span>
+                            <span>Volume</span>
+                            <span>AI Score</span>
+                        </div>
+                        <div class="table-row">
+                            <span class="symbol">AAPL</span>
+                            <span class="price">$175.20</span>
+                            <span class="change positive">+2.4%</span>
+                            <span class="volume">45.2M</span>
+                            <span class="ai-score bullish">Bullish</span>
+                        </div>
+                        <div class="table-row">
+                            <span class="symbol">GOOGL</span>
+                            <span class="price">$142.80</span>
+                            <span class="change negative">-1.1%</span>
+                            <span class="volume">28.7M</span>
+                            <span class="ai-score neutral">Neutral</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trade History Section -->
+        <section id="history" class="section">
+            <div class="container">
+                <h1 class="section-title">Trade History</h1>
+                
+                <div class="history-stats">
+                    <div class="stat-item">
+                        <label>Total Trades</label>
+                        <span>156</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Winning Trades</label>
+                        <span>114</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Total Profit</label>
+                        <span class="positive">+$4,230.50</span>
+                    </div>
+                </div>
+
+                <div class="history-table">
+                    <div class="table-header">
+                        <span>Date</span>
+                        <span>Symbol</span>
+                        <span>Type</span>
+                        <span>Entry</span>
+                        <span>Exit</span>
+                        <span>P&L</span>
+                    </div>
+                    <div class="table-row">
+                        <span>2024-01-29</span>
+                        <span>AAPL</span>
+                        <span class="buy">BUY</span>
+                        <span>$172.50</span>
+                        <span>$175.20</span>
+                        <span class="positive">+$270.00</span>
+                    </div>
+                    <div class="table-row">
+                        <span>2024-01-28</span>
+                        <span>TSLA</span>
+                        <span class="sell">SELL</span>
+                        <span>$248.90</span>
+                        <span>$245.20</span>
+                        <span class="positive">+$185.00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section id="alerts" class="section">
+            <div class="container">
+                <h1 class="section-title">Price Alerts</h1>
+                
+                <div class="alerts-list">
+                    <div class="alert-item active">
+                        <div class="alert-info">
+                            <span class="symbol">AAPL</span>
+                            <span class="alert-type">Price Alert</span>
+                            <span class="alert-condition">Above $180.00</span>
+                        </div>
+                        <div class="alert-status">
+                            <span class="status active">Active</span>
+                            <button class="delete-alert">×</button>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item triggered">
+                        <div class="alert-info">
+                            <span class="symbol">NVDA</span>
+                            <span class="alert-type">Signal Alert</span>
+                            <span class="alert-condition">New BUY Signal</span>
+                        </div>
+                        <div class="alert-status">
+                            <span class="status triggered">Triggered</span>
+                            <button class="delete-alert">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="add-alert-btn">
+                    <i class="fas fa-plus"></i>
+                    Add New Alert
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
