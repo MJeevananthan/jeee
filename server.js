@@ -1,9 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const url = require('url');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 // MIME types
 const mimeTypes = {
@@ -19,7 +18,8 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-    let pathname = url.parse(req.url).pathname;
+    const urlObj = new URL(req.url, `http://${req.headers.host}`);
+    let pathname = urlObj.pathname;
     
     // Default to login.html for root path
     if (pathname === '/') {

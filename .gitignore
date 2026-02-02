@@ -15,6 +15,13 @@ build/
 .env.test.local
 .env.production.local
 
+# Firebase
+firebase-debug.log
+firebase-debug.*.log
+.firebase/
+google-service-account.json
+service-account-key.json
+
 # IDE and editor files
 .vscode/
 .idea/
